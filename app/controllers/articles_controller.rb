@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update ]
+  before_action :set_article, only: %i[ show edit update destroy ]
 
   # GET /articles or /articles.json
   def index
@@ -48,9 +48,9 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
 
-    respond_to do |format|
+    # respond_to do |format|
       redirect_to articles_url, notice: "Article was successfully destroyed."
-    end
+    # end
   end
 
   private
