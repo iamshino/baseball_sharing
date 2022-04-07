@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      article: 記事
+
+    attributes:
+      article:
+        title: ブランド名
+        content: コンセプト
