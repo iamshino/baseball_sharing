@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update ]
+  before_action :set_article, only: %i[ show edit update destroy ]
 
   # GET /articles or /articles.json
   def index
@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
 
     # respond_to do |format|
       if @article.save!
-        redirect_to article_url(@article), notice: "Article was successfully created."
+        redirect_to article_url(@article), notice: "記事を投稿しました"
       else
         render :new, status: :unprocessable_entity
       end
@@ -37,7 +37,7 @@ class ArticlesController < ApplicationController
   def update
     # respond_to do |format|
       if @article.update!(article_params)
-        redirect_to article_url(@article), notice: "Article was successfully updated."
+        redirect_to article_url(@article), notice: "記事を更新しました"
       else
         render :edit, status: :unprocessable_entity
       end
@@ -48,9 +48,9 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
 
-    respond_to do |format|
-      redirect_to articles_url, notice: "Article was successfully destroyed."
-    end
+    # respond_to do |format|
+      redirect_to articles_url, notice: "記事を削除しました"
+    # end
   end
 
   private
