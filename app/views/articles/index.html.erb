@@ -2,8 +2,9 @@
 
 <h1>記事一覧</h1>
 
-<%= link_to '記事作成', new_article_path, class: "btn btn-info" %>
-
+<% if user_signed_in? %>
+  <%= link_to '記事作成', new_article_path, class: "btn btn-info" %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -20,8 +21,6 @@
         <td><%= article.content %></td>
         <td>
           <%= link_to '詳細', article, class: "btn btn-success" %>
-          <%= link_to '編集', edit_article_path(article), class: "btn btn-warning" %>
-          <%= link_to '削除', article, class: "btn btn-danger", method: :delete, data: { confirm: '削除しますか?' } %>
         </td>
       </tr>
     <% end %>

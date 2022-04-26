@@ -10,5 +10,8 @@
   </div>
 </div>
 
-<%= link_to '編集', edit_article_path(@article), class: "btn btn-warning" %> |
+<%# 詳細ページのユーザーidとログインしているユーザーidが等しい場合表示 %>
+<% if current_user&.id == @article.user_id %>
+  <%= link_to '編集', edit_article_path(@article.id), class: "btn btn-warning" %> |
+<% end %>
 <%= link_to '記事一覧', articles_path, class: "btn btn-secondary" %>
