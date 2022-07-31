@@ -50,7 +50,7 @@ module WonderfulPostApp
       g.javascripts false
       g.stylesheets false
       g.helper false
-      g.test_framework false
+      g.test_framework :rspec
     end
   end
 end
