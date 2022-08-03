@@ -1,23 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe Article, type: :model do
-  context "titleを記述している時" do
+  let(:user) { build(:user) }
+
+  context "titleとcontentを記述している時" do
+    let(:article) { build(:article, user: user) }
+
     it "記事が作成できる" do
+      expect(article).to be_valid
     end
   end
 
-  context "titleを記述していない時" do
+  context "titleのみ記述している時" do
+    let(:article) { build(:article, user: user, content: nil) }
+
     it "エラーする" do
+      expect(article).to be_invalid
     end
   end
 
-  context "contentを記述している時" do
-    it "記事が作成できる" do
-    end
-  end
+  context "contentのみ記述している時" do
+    let(:article) { build(:article, user: user, title: nil) }
 
-  context "contentを記述していない時" do
     it "エラーする" do
+      expect(article).to be_invalid
+    end
+  end
+
+  context "どちらも記述していない時" do
+    let(:article) { build(:article, user: user, title: nil, content: nil) }
+
+    it "エラーする" do
+      expect(article).to be_invalid
     end
   end
 end
