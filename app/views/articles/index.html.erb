@@ -23,6 +23,7 @@
           <% end %>
         </td>
         <td><%= article.content %></td>
+        <td><%= "#{article.comments.count} コメント" %></td>
         <td>
           <%= link_to '詳細', article, class: "btn btn-success" %>
         </td>
