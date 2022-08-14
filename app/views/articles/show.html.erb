@@ -18,3 +18,23 @@
   <%= link_to '編集', edit_article_path(@article.id), class: "btn btn-warning" %> |
 <% end %>
 <%= link_to '記事一覧', articles_path, class: "btn btn-secondary" %>
+
+<% @article.comments.each do |comment| %>
+  <div>
+    <%= comment.user.email %>
+    <p><%= simple_format( comment.comment ) %></p>
+    <% if comment.user.id == @article.user.id %>
+      <%= link_to '削除', article_comment_path(article_id: @article.id, id: comment.id), data: {comfirm: '本当に削除しますか？'}, method: :delete %>
+      <p></p>
+    <% end %>
+  </div>
+<% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@article, @comment], local: true) do |form| %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: @article.id %>
+        <%= form.text_area :comment, rows: 5 %>
+        <%= form.submit "コメントする" %>
+      <% end %>
+    <% end %>
