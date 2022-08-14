@@ -1,11 +1,19 @@
 class CommentsController < ApplicationController
 
   def create
+    # @user = User.find_by(id: params[:user_id])
     @article = Article.find(params[:article_id])
-    @comments = current_user.comments.new(comment_params)
-    @comments.article_id = @article.id
-    @comments.save
-    redirect_to article_path(@article)
+    comment = Comment.new(comment_params)
+    if comment.save
+      # binding.pry
+      redirect_to article_path(id: @article.id)
+    else
+      @comment = Comment.new
+      @article = Article.find(params[:article_id])
+      @comments = current_user.comments
+      render 'articles/show'
+      # binding.pry
+    end
   end
 
   def destroy
@@ -16,7 +24,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:comment, :user_id, :article_id)
   end
 
   def set_comment

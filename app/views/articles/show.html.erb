@@ -22,15 +22,19 @@
 <% @article.comments.each do |comment| %>
   <div>
     <%= comment.user.email %>
+    <p><%= simple_format( comment.comment ) %></p>
     <% if comment.user.id == @article.user.id %>
-      <p>投稿者</p>
-      <%= simple_format( comment.comment) %>
-      <%= link_to '削除', article_comment_path(@article.comments), data: {comfirm: '本当に削除しますか？'}, method: :delete %>
-    <% end %>
-
-    <%= form_for [@article, @comments] do |form| %>
-      <%= form.text_field :comment %>
-      <%= form.submit "投稿" %>
+      <%= link_to '削除', article_comment_path(article_id: @article.id, id: comment.id), data: {comfirm: '本当に削除しますか？'}, method: :delete %>
+      <p></p>
     <% end %>
   </div>
 <% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@article, @comment], local: true) do |form| %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.hidden_field :article_id, value: @article.id %>
+        <%= form.text_area :comment, rows: 5 %>
+        <%= form.submit "コメントする" %>
+      <% end %>
+    <% end %>

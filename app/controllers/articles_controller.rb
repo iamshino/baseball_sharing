@@ -12,7 +12,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1 or /articles/1.json
   def show
     @article = Article.find(params[:id])
-    @comments = Comment.new
+    @comments = @article.comments
+    @comment = Comment.new
   end
 
   # GET /articles/new
