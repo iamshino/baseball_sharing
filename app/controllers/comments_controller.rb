@@ -5,14 +5,12 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     comment = Comment.new(comment_params)
     if comment.save
-      # binding.pry
       redirect_to article_path(id: @article.id)
     else
       @comment = Comment.new
       @article = Article.find(params[:article_id])
       @comments = current_user.comments
       render 'articles/show'
-      # binding.pry
     end
   end
 
