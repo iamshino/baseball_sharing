@@ -19,7 +19,7 @@
 <% end %>
 <%= link_to '記事一覧', articles_path, class: "btn btn-secondary" %>
 
-<% @article.comments.each do |comment| %>
+<% @comments.each do |comment| %>
   <div>
     <%= comment.user.email %>
     <p><%= simple_format( comment.comment ) %></p>
