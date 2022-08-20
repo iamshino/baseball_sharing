@@ -16,6 +16,7 @@ RSpec.describe Article, type: :model do
 
     it "エラーする" do
       expect(article).to be_invalid
+      expect(article.errors.details[:content][0][:error]).to eq :blank
     end
   end
 
@@ -24,6 +25,7 @@ RSpec.describe Article, type: :model do
 
     it "エラーする" do
       expect(article).to be_invalid
+      expect(article.errors.details[:title][0][:error]).to eq :blank
     end
   end
 
@@ -32,6 +34,8 @@ RSpec.describe Article, type: :model do
 
     it "エラーする" do
       expect(article).to be_invalid
+      expect(article.errors.details[:title][0][:error]).to eq :blank
+      expect(article.errors.details[:content][0][:error]).to eq :blank
     end
   end
 end
