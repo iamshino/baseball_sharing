@@ -10,6 +10,16 @@
 
   <div class="card-body">
     <%= @article.content %>
+    いいね件数：<%= @article.likes.count %>
+    <% if current_user.already_like?(@article) %>
+      <%= button_to 'いいねを取り消す', article_like_path(@article), method: :delete %>
+    <% else %>
+      <%= button_to 'いいね', article_likes_path(@article) %>
+    <% end %>
+    <div>いいねしたユーザー</div>
+    <% @article.liked_users.each do |user| %>
+      <p><%= user.email %></p>
+    <% end %>
   </div>
 </div>
 
@@ -23,18 +33,18 @@
   <div>
     <%= comment.user.email %>
     <p><%= simple_format( comment.comment ) %></p>
-    <% if comment.user.id == @article.user.id %>
-      <%= link_to '削除', article_comment_path(article_id: @article.id, id: comment.id), data: {comfirm: '本当に削除しますか？'}, method: :delete %>
+    <% if comment.user.id == current_user.id %>
+      <%= link_to '削除', article_comment_path(article_id: @article.id, id: comment.id), method: :delete, data: {confirm: '本当に削除しますか？'} %>
       <p></p>
     <% end %>
   </div>
 <% end %>
 
-    <% if user_signed_in? %>
-      <%= form_with(model: [@article, @comment], local: true) do |form| %>
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.hidden_field :article_id, value: @article.id %>
-        <%= form.text_area :comment, rows: 5 %>
-        <%= form.submit "コメントする" %>
-      <% end %>
-    <% end %>
+<% if user_signed_in? %>
+  <%= form_with(model: [@article, @comment], local: true) do |form| %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :article_id, value: @article.id %>
+    <%= form.text_area :comment, rows: 5 %>
+    <%= form.submit "コメントする" %>
+  <% end %>
+<% end %>
