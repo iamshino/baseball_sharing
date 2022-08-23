@@ -22,7 +22,7 @@ RSpec.describe Comment, type: :model do
   end
 
   context "commentが100文字を超えているとき" do
-    let(:comment) { build(:comment, comment: a * 101, user: user, article: article) }
+    let(:comment) { build(:comment, comment: 'a' * 101, user: user, article: article) }
 
     it "エラーする" do
       expect(comment).to be_invalid

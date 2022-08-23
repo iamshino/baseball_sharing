@@ -9,6 +9,7 @@ RSpec.describe "Comments", type: :request do
   let!(:article) { create(:article, user: user) }
 
   describe "POST /articles/:article_id/comments" do
+
     subject { post article_comments_path(article_id: article.id),  params: params }
 
     context 'params is valid' do
