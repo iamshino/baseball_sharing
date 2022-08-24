@@ -24,6 +24,7 @@
         </td>
         <td><%= article.content %></td>
         <td><%= "#{article.comments.size} コメント" %></td>
+        <td><%= "#{article.liked_users.count} いいね" %><td>
         <td>
           <%= link_to '詳細', article, class: "btn btn-success" %>
         </td>

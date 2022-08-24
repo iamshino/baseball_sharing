@@ -32,5 +32,11 @@
         </td>
       </tr>
     <% end %>
+    <h3>いいねしている投稿</h3>
+    <% @user.liked_articles.each do |article| %>
+      <%= article.user.email %> |
+      <%= article.content %>
+      <p></p>
+    <% end %>
   </tbody>
 </table>
