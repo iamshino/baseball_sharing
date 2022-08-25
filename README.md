@@ -1,24 +1,40 @@
-# README
+## wonderful_post_app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+野球部向けの練習日記サイトです。
+日々の練習の取り組みを共有できます。
 
-Things you may want to cover:
+## URL
 
-* Ruby version
+http://localhost:3000/
 
-* System dependencies
+## 使用技術
 
-* Configuration
+- Ruby 2.7.2
 
-* Database creation
+- Ruby on Rails 6.0.4.7
 
-* Database initialization
+- MySQL
 
-* How to run the test suite
+- Docker/Docker-compose
 
-* Services (job queues, cache servers, search engines, etc.)
+- RSpec
 
-* Deployment instructions
+## 機能一覧
 
-* ...
+- ユーザー登録、ログイン機能
+
+- 投稿機能
+
+- いいね機能
+
+- コメント機能
+
+- ページネーション機能
+
+- 検索機能
+
+## テスト
+
+- RSpec
+  - 単体テスト(model)
+  - 機能テスト(request)
