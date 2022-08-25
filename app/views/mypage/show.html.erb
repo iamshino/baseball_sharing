@@ -33,8 +33,8 @@
       </tr>
     <% end %>
     <h3>いいねしている投稿</h3>
-    <% @user.liked_articles.each do |article| %>
-      <%= article.user.email %> |
+    <% current_user.liked_articles.each do |article| %>
+      <%= article.user.name %> |
       <%= article.content %>
       <p></p>
     <% end %>

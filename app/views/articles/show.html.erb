@@ -10,15 +10,17 @@
 
   <div class="card-body">
     <%= @article.content %>
-    いいね件数：<%= @article.likes.count %>
-    <% if current_user.already_like?(@article) %>
-      <%= button_to 'いいねを取り消す', article_like_path(@article), method: :delete %>
-    <% else %>
-      <%= button_to 'いいね', article_likes_path(@article) %>
-    <% end %>
-    <div>いいねしたユーザー</div>
-    <% @article.liked_users.each do |user| %>
-      <p><%= user.email %></p>
+    <% if user_signed_in? %>
+      いいね件数：<%= @article.likes.count %>
+      <% if current_user.already_like?(@article) %>
+        <%= button_to 'いいねを取り消す', article_like_path(@article), method: :delete %>
+      <% else %>
+        <%= button_to 'いいね', article_likes_path(@article) %>
+      <% end %>
+      <div>いいねしたユーザー</div>
+      <% @article.liked_users.each do |user| %>
+        <p><%= user.name %></p>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -31,7 +33,7 @@
 
 <% @comments.each do |comment| %>
   <div>
-    <%= comment.user.email %>
+    <%= comment.user.name %>
     <p><%= simple_format( comment.comment ) %></p>
     <% if comment.user.id == current_user.id %>
       <%= link_to '削除', article_comment_path(article_id: @article.id, id: comment.id), method: :delete, data: {confirm: '本当に削除しますか？'} %>
